@@ -10,8 +10,6 @@ from models.attribute import Attribute
 from models.quote import Quote
 from models.all_history import All_history
 from datetime import *
-
-
 mlab.connect()
 
 app = Flask(__name__)
@@ -59,7 +57,6 @@ def sign_up():
             hstr_list = All_history(user = username)
             hstr_list.save()
             Friend(username = username).save()
-            
             return redirect("/sign_in")     
 
 
@@ -92,13 +89,8 @@ def log_out():
     return redirect(url_for("sign_in"))
 
 @app.route("/")
-def welcome():
-    return render_template("home.html")
-
-@app.route("/home")
 def home():
-    user =User.objects(username=session["token"]).first()
-    return render_template("introduce.html",avt=user.avt,name=user.fullname)
+    return render_template("home.html")
 
 @app.route("/social",methods=["GET","POST"])  
 def social():
@@ -111,7 +103,6 @@ def social():
     for post in posts:
         if post.user in friends or post.user == session["token"]:
             friend_post.append(post)
-    print(friend_post)
     # for post in friend_post:
     #     commentss.append(post.comments) 
     if request.method == "GET":
@@ -125,7 +116,6 @@ def social():
                     for j in range(len(friend_post)): 
                         if str(j+1) in i: 
                             p = friend_post[j]
-                            print(p.like) 
                             if session["token"] not in p.wholike:
                                 p.like += 1 
                                 p.wholike.append(session["token"])
@@ -181,6 +171,7 @@ def unfollow():
             friend_list.remove(unf)
             user.save()
             return redirect("/social/unfollow")
+
 
 
 @app.route("/contribute", methods= ["GET", "POST"])
@@ -290,7 +281,7 @@ def ca_nhan():
 def hoat_dong():
     if request.method == "GET":
         act_list = Activities.objects()
-        return render_template("hoat_dong.html", acts = act_list,name = session["token"],avt="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png")
+        return render_template("hoat_dong.html", acts = act_list,name = session["token"])
     else:
         if "token" in session:
             user = session["token"]
@@ -301,8 +292,7 @@ def hoat_dong():
             for att in att_list:
                 if att in form:
                     return redirect("/hoat-dong-sx-ttt-" + att)
-                else:
-                    pass
+
             for act in act_list:
                 act_tit = form.get(act["tit"])
                 if act_tit != None:
@@ -336,7 +326,7 @@ def hoat_dong():
 def hoat_dong_sx_ttt(sort):
     if request.method == "GET":
         act_list = Activities.objects()
-        return render_template("hoat_dong_sx_ttt.html", acts = act_list, sort = sort,name = session["token"],avt="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png")
+        return render_template("hoat_dong_sx_ttt.html", acts = act_list, sort = sort,name = session["token"])
     else:
         if "token" in session:        
             user = session["token"]
@@ -351,8 +341,7 @@ def hoat_dong_sx_ttt(sort):
             for att in att_list:
                 if att in form:
                     return redirect("/hoat-dong-sx-ttt-" + att)
-                else:
-                    pass
+
             for act in act_list:
                 act_tit = form.get(act["tit"])
                 if act_tit != None:
@@ -377,7 +366,7 @@ def hoat_dong_sx_ttt(sort):
                         post = Post(tit = act["tit"] ,img = img, user = session["token"], descript = des)
                         post.save()
                     break
-            return render_template("hoat_dong_sx_ttt.html", acts = act_list)
+            return redirect("/hoat-dong")
         else:
             return redirect(url_for("sign_in"))
 
@@ -430,7 +419,7 @@ def habit():
 
             if request.method == "GET":
                 habit_list = Habit.objects(username = user)
-                return render_template("habit.html", habits = habit_list,name=session["token"],avt="https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png")
+                return render_template("habit.html", habits = habit_list)
             else:
                 att_list = Attribute.objects(username = user).first()
                 form = request.form
@@ -461,7 +450,7 @@ def habit():
                         break
                 return redirect("/ca_nhan")
         else:
-            return redirect("/sign_in")           
-            
+            return redirect("/sign_in")
+
 if __name__ == '__main__':
   app.run(debug=True)
