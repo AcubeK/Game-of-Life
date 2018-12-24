@@ -250,7 +250,7 @@ def password2():
         form = request.form
         password = form["password"]
         confirm = form["confirm"]
-        error =None
+        error = None
         if password == "" or len(password) < 8:
             error = "Vui lòng chọn mật khẩu dài hơn"
             return render_template("password2.html",error=error)
@@ -277,7 +277,7 @@ def ca_nhan():
             quote = form["quote"]
             author = form["author"]
             if author == "":
-                q = Quote(username= user, quote = quote)
+                q = Quote(username = user, quote = quote)
             else:
                 q = Quote(username = user, quote = quote, author = author)
             q.save()
