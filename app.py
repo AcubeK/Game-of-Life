@@ -182,6 +182,23 @@ def unfollow():
             user.save()
             return redirect("/social/unfollow")
 
+@app.route("/save_post",methods=["GET","POST"])
+def save_share():
+    if request.method == "GET":
+        user = User.objects(username=session["token"]).first()
+        return render_template("save_share.html",name = session["token"],avt=user.avt)
+    else:
+        form = request.form
+        des = form["description"]
+        img = form["image"]
+        share = form["share"]
+        if share == "yes":
+            post = Post(img=img,user=session["token"],descript=des) 
+            post.save()
+        All_history(img=img,user=session["token"],des=des).save()
+        return redirect(url_for("ca_nhan"))
+
+
 @app.route("/contribute", methods= ["GET", "POST"])
 def contribute():
     if request.method == "GET":
@@ -250,7 +267,7 @@ def password2():
         form = request.form
         password = form["password"]
         confirm = form["confirm"]
-        error = None
+        error =None
         if password == "" or len(password) < 8:
             error = "Vui lòng chọn mật khẩu dài hơn"
             return render_template("password2.html",error=error)
@@ -277,7 +294,7 @@ def ca_nhan():
             quote = form["quote"]
             author = form["author"]
             if author == "":
-                q = Quote(username = user, quote = quote)
+                q = Quote(username= user, quote = quote)
             else:
                 q = Quote(username = user, quote = quote, author = author)
             q.save()

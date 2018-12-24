@@ -10,11 +10,11 @@
          type: "pie",    
          legendText: "{indexLabel}",
          dataPoints: [
-             { y: st, indexLabel: "Sức khỏe" },
-             { y: knl, indexLabel: "Trí tuệ" },
-             { y: cre, indexLabel: "Sáng tạo" },
-             { y: per, indexLabel: "Nhân phẩm"},
-             { y: soc, indexLabel: "Xã hội" }
+             { y: st, indexLabel: "Thể chất(STR)" },
+             { y: knl, indexLabel: "Trí tuệ(KNL)" },
+             { y: cre, indexLabel: "Sáng tạo(CRE)" },
+             { y: per, indexLabel: "Tính cách(PER)"},
+             { y: soc, indexLabel: "Xã hội(SOC)" }
          ]
      }
      ]
