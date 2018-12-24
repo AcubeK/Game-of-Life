@@ -8,29 +8,45 @@
     <link rel="stylesheet" href="../static/introduce.css">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="/templates/favicon (1).ico" rel="icon" type="image/x-icon" />
-    <link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAATSgAAIVFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIiIgIREAACIiIiIhEAACIRAAIiEQACIRAAACIRACIhEAAAIhEAIiEQAgAiEQIiIRACIiIRAiIhEAAiIRESIiEQAAAAAAIiIRAAAAAAAiIhEAACIhEQIiERAAAiEQAiIREAACERAAIiERAAIREAACIiIiIhEAAAAiIiIREAD8EAAA8AEAAOHBAADD4QAAg+EAAINhAAADAQAAA4AAAAP/AAAD/wAAA8AAAIHhAACB4QAAwOEAAOADAADwBwAA" rel="icon" type="image/x-icon" />
-    <title>Game of Life</title>
+    <title>👍 Game of Life</title>
 </head>
 <body>
-<div id="head" ">
-    <div id="title">
-            <span id="name">Game of Life</span>
-            <div id="user">
-                <div id="left">
-                    <div>{{ name }}</div>
-                    <a href="/logout"><button>Đăng xuất</button></a>
+    <div id="head" ">
+        <div id="title">
+                <span id="name">Game of Life</span>
+                <div id="user">
+                    <div id="left">
+                        <div>{{ name }}</div>
+                        <a href="http://127.0.0.1:5000/logout"><button>Đăng xuất</button></a>
+                    </div>
+                    <div id="right"><img src="{{ avt }}" alt="" width="50px" height="50px"></div>
                 </div>
-                <div id="right"><img src="{{ avt }}" alt="" width="50px" height="50px"></div>
-            </div>
+        </div>
+        <div class="p-2" id="menu">
+            <ul>
+                <li><a href="http://127.0.0.1:5000/home">Giới thiệu</a></li>
+                <li><a href="/ca_nhan">Cá nhân</a></li>
+                <li><a href="/hoat-dong">Hoạt động</a></li>
+                <li><a href="/habit">Thói quen</a></li>
+                <li><a href="http://127.0.0.1:5000/social">Cộng đồng</a></li>
+                <li><a href="/contribute">Góp ý</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="p-2" id="menu">
-        <ul>
-            <li><a href="/home">Giới thiệu</a></li>
-            <li><a href="/ca_nhan">Cá nhân</a></li>
-            <li><a href="/hoat-dong">Hoạt động</a></li>
-            <li><a href="/habit">Thói quen</a></li>
-            <li><a href="/social">Cộng đồng</a></li>
-            <li><a href="/contribute">Góp ý</a></li>
-        </ul>
+    <div id="content">
+        <div id="rule" >
+            <div><strong>Bạn là ai,làm gì trong trò chơi này?</strong></div>
+            <div>Bạn sẽ không được nhập vai một nhân vật nào, mà chính là nhân vật chính của trò chơi này.Mỗi nhân vật sẽ có các thuộc tính: <span style="color:blue">Thể chất(STR)</span></span>,<span style="color:red">Trí tuệ(KNL)</span>,<span style="color:green">Sáng tạo(CRE)</span>,<span style="color:lightseagreen">Tính cách(PER)</span>,<span style="color:purple">Xã hội(SOC)</span> với mức ban đầu đều là 1,chỉ số của các thuộc tính càng cao,nghĩa là bạn càng"mạnh"</div><br>
+            <div><strong>Trong mục Cá nhân:</strong></div>
+            <p>Bạn sẽ được thấy <a href="/ca_nhan" style="text-decoration: none ; color:brown">Thông tin cá nhân</a> của mình(có thể thay đổi bất kì lúc nào),biểu đồ các thuộc tính để bạn theo dõi, từ đó có kế hoạch thay đổi sao cho phù hợp với mong muốn của bản thân.Bạn cũng có thể thêm vào những câu trích dẫn mà mình tâm đắc,thậm chí là cả phương châm sống của bản thân.Cuối cùng là lịch sử hoạt động-nơi lưu lại những việc bạn đã hoàn thành để sau này có thể nhìn lại</p><br>
+            <div><strong>Tiếp đến là hoạt động</strong></div>
+            <p>Đây là cách để bạn gia tăng chỉ số của những thuộc tính cho mình,nói cách khác là giúp bạn "mạnh" hơn,các <a href="/hoat-dong" style="text-decoration: none ; color:brown">hoạt động</a> sẽ được sắp xếp thành từng nhóm,và mỗi hoạt động khi bạn hoàn thành(chỉ cần click vào hoạt động đã hoàn thành) sẽ tăng cho bạn 1(vài) chỉ số nhất định,trước khi lưu bạn cũng có thể thêm miêu tả như thời gian,địa điểm,cảm xúc,... và hình ảnh để xem lại hoặc chia sẻ cho mọi người biết</p><br>
+            <div><strong>Ngại gì mà không chia sẻ?</strong></div>
+            <p>Những hoạt động mà bạn chọn chia sẻ sẽ được những người theo dõi bạn nhìn thấy,like hay comment, bạn cũng có thể theo dõi người khác để có thể làm điều tương tự trong mục <a href="/social" style="text-decoration: none ; color:brown">Cộng đồng</a> </p><br>
+            <div><strong>Thói quen?</strong></div>
+            <p>Bất kì hoạt động nào bạn làm tối thiệu 3 lần trong vòng 3 ngày sẽ được thêm vào mục <a href="/habit" style="text-decoration: none ; color:brown">thói quen</a>,kể từ đó,nếu mỗi ngày bạn hoàn thành việc đó tối thiểu 1 lần thì sẽ gia tăng được chuỗi hoàn thành cho thói quen đó,hãy cố gắng giữ những thói quen tốt:))</p><br>
+            <p><strong>Còn thiếu nhiều...</strong></p>
+            <p>Những hoạt động mà chúng tôi thêm vào chưa phải là tất cả,còn rất nhiều hoạt động thú vị khác mà chúng tôi chưa kịp nghĩ đến,nếu bạn có bất kì hoạt động nào như vậy,hãy cho chúng tôi biết và nhận phần thưởng xứng đáng trong mục <a href="/contribute" style="text-decoration: none ; color:brown">Góp ý</a></p><br>
+        </div>
     </div>
+</body>
