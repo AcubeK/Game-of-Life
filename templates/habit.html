@@ -36,6 +36,7 @@
     <div class = "activities" id="list">
         <ul id="list-action" style="list-style: none;">
         {% for habit in habits %}
+            {% if {{habit.streak}} >= 3 %}
             <li id="li{{loop.index}}">
                 <h3 id="title{{loop.index}}">{{ habit.tit }}</h3>
                 Thời gian duy trì thói quen lâu nhất: {{ habit.streak }} ngày liên tiếp <br>
@@ -61,6 +62,7 @@
                     {% endif %}
                 {% endfor %}
             </li>
+            {% endif %}
         {% endfor %}
         </ul>
         
